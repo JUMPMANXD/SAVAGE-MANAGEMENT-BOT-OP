@@ -1,8 +1,7 @@
 import threading
 
-from sqlalchemy import Column, Integer, UnicodeText
-
 from LEGEND.modules.sql import BASE, SESSION
+from sqlalchemy import Column, Integer, UnicodeText
 
 
 class UserInfo(BASE):
