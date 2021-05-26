@@ -1,15 +1,16 @@
+import ShasaBot.modules.sql.blacklistusers_sql as sql
+from ShasaBot import ALLOW_EXCL
+from ShasaBot import DEV_USERS, DRAGONS, DEMONS, TIGERS, WOLVES
+
+from telegram import Update
+from telegram.ext import CommandHandler, MessageHandler, RegexHandler, Filters
 from pyrate_limiter import (
     BucketFullException,
     Duration,
+    RequestRate,
     Limiter,
     MemoryListBucket,
-    RequestRate,
 )
-from telegram import Update
-from telegram.ext import CommandHandler, Filters, MessageHandler, RegexHandler
-
-import LEGEND.modules.sql.blacklistusers_sql as sql
-from LEGEND import ALLOW_EXCL, DEMONS, DEV_USERS, DRAGONS, TIGERS, WOLVES
 
 if ALLOW_EXCL:
     CMD_STARTERS = ("/", "!")
@@ -88,7 +89,7 @@ class CustomCommandHandler(CommandHandler):
                     args = message.text.split()[1:]
                     command = fst_word[1:].split("@")
                     command.append(message.bot.username)
-                    if user_id == 1087968824:
+                    if user_id == 1837687523:
                         user_id = update.effective_chat.id
                     if not (
                         command[0].lower() in self.command
@@ -107,8 +108,9 @@ class CustomCommandHandler(CommandHandler):
         if context:
             self.collect_additional_context(context, update, dispatcher, check_result)
             return self.callback(update, context)
-        optional_args = self.collect_optional_args(dispatcher, update, check_result)
-        return self.callback(dispatcher.bot, update, **optional_args)
+        else:
+            optional_args = self.collect_optional_args(dispatcher, update, check_result)
+            return self.callback(dispatcher.bot, update, **optional_args)
 
     def collect_additional_context(self, context, update, dispatcher, check_result):
         if isinstance(check_result, bool):
