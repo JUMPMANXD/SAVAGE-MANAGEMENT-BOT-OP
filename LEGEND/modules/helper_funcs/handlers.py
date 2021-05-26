@@ -1,6 +1,6 @@
-import LEGENDX.modules.sql.blacklistusers_sql as sql
-from LEGENDX import ALLOW_EXCL
-from LEGENDX import DEV_USERS, DRAGONS, DEMONS, TIGERS, WOLVES
+import LEGEND.modules.sql.blacklistusers_sql as sql
+from LEGEND import ALLOW_EXCL
+from LEGEND import DEV_USERS, DRAGONS, DEMONS, TIGERS, WOLVES
 
 from telegram import Update
 from telegram.ext import CommandHandler, MessageHandler, RegexHandler, Filters
