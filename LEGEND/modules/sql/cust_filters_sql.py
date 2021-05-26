@@ -1,10 +1,9 @@
-
 import threading
 
-from sqlalchemy import Boolean, Column, Integer, String, UnicodeText, distinct, func
+from sqlalchemy import Column, String, UnicodeText, Boolean, Integer, distinct, func
 
-from LEGEND.modules.helper_funcs.msg_types import Types
-from LEGEND.modules.sql import BASE, SESSION
+from ShasaBot.modules.helper_funcs.msg_types import Types
+from ShasaBot.modules.sql import BASE, SESSION
 
 
 class CustomFilters(BASE):
