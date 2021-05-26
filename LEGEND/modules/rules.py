@@ -1,5 +1,9 @@
 from typing import Optional
 
+import ShasaBot.modules.sql.rules_sql as sql
+from ShasaBot import dispatcher
+from ShasaBot.modules.helper_funcs.chat_status import user_admin
+from ShasaBot.modules.helper_funcs.string_handling import markdown_parser
 from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
@@ -11,11 +15,6 @@ from telegram import (
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 from telegram.utils.helpers import escape_markdown
-
-import LEGEND.modules.sql.rules_sql as sql
-from LEGEND import dispatcher
-from LEGEND.modules.helper_funcs.chat_status import user_admin
-from LEGEND.modules.helper_funcs.string_handling import markdown_parser
 
 
 @run_async
@@ -119,13 +118,13 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- ✪ /rules*:* get the rules for this chat.
+ ❍ /rules*:* get the rules for this chat.
 *Admins only:*
- ✪ /setrules <your rules here>*:* set the rules for this chat.
- ✪ /clearrules*:* clear the rules for this chat.
+ ❍ /setrules <your rules here>*:* set the rules for this chat.
+ ❍ /clearrules*:* clear the rules for this chat.
 """
 
-__mod_name__ = "Rules 💰"
+__mod_name__ = "Rules"
 
 GET_RULES_HANDLER = CommandHandler("rules", get_rules, filters=Filters.group)
 SET_RULES_HANDLER = CommandHandler("setrules", set_rules, filters=Filters.group)
@@ -133,4 +132,3 @@ RESET_RULES_HANDLER = CommandHandler("clearrules", clear_rules, filters=Filters.
 
 dispatcher.add_handler(GET_RULES_HANDLER)
 dispatcher.add_handler(SET_RULES_HANDLER)
-dispatcher.add_handler(RESET_RULES_HANDLER)
