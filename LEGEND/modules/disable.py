@@ -12,7 +12,7 @@ from telegram.ext import (
 )
 from telegram.utils.helpers import escape_markdown
 
-from LEGENDX import dispatcher
+from LEGEND import dispatcher
 from LEGENDX.modules.helper_funcs.handlers import CMD_STARTERS, SpamChecker
 from LEGENDX.modules.helper_funcs.misc import is_module_loaded
 
