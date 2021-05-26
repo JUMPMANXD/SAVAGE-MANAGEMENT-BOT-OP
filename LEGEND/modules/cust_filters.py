@@ -1,37 +1,39 @@
-import random
 import re
+import random
 from html import escape
 
 import telegram
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Message, ParseMode
+from telegram import ParseMode, InlineKeyboardMarkup, Message, InlineKeyboardButton
 from telegram.error import BadRequest
 from telegram.ext import (
-    CallbackQueryHandler,
     CommandHandler,
-    DispatcherHandlerStop,
-    Filters,
     MessageHandler,
+    DispatcherHandlerStop,
+    CallbackQueryHandler,
     run_async,
+    Filters,
 )
-from telegram.utils.helpers import escape_markdown, mention_html
+from telegram.utils.helpers import mention_html, escape_markdown
 
-from LEGEND import DRAGONS, LOGGER, dispatcher
-from LEGEND.modules.connection import connected
-from LEGEND.modules.disable import DisableAbleCommandHandler
-from LEGEND.modules.helper_funcs.alternate import send_message, typing_action
-from LEGEND.modules.helper_funcs.chat_status import user_admin
-from LEGEND.modules.helper_funcs.extraction import extract_text
-from LEGEND.modules.helper_funcs.filters import CustomFilters
-from LEGEND.modules.helper_funcs.handlers import MessageHandlerChecker
-from LEGEND.modules.helper_funcs.misc import build_keyboard_parser
-from LEGEND.modules.helper_funcs.msg_types import get_filter_type
-from LEGEND.modules.helper_funcs.string_handling import (
+from ShasaBot import dispatcher, LOGGER, DRAGONS
+from ShasaBot.modules.disable import DisableAbleCommandHandler
+from ShasaBot.modules.helper_funcs.handlers import MessageHandlerChecker
+from ShasaBot.modules.helper_funcs.chat_status import user_admin
+from ShasaBot.modules.helper_funcs.extraction import extract_text
+from ShasaBot.modules.helper_funcs.filters import CustomFilters
+from ShasaBot.modules.helper_funcs.misc import build_keyboard_parser
+from ShasaBot.modules.helper_funcs.msg_types import get_filter_type
+from ShasaBot.modules.helper_funcs.string_handling import (
+    split_quotes,
     button_markdown_parser,
     escape_invalid_curly_brackets,
     markdown_to_html,
-    split_quotes,
 )
-from LEGEND.modules.sql import cust_filters_sql as sql
+from ShasaBot.modules.sql import cust_filters_sql as sql
+
+from ShasaBot.modules.connection import connected
+
+from ShasaBot.modules.helper_funcs.alternate import send_message, typing_action
 
 HANDLER_GROUP = 10
 
@@ -403,6 +405,7 @@ def reply_filter(update, context):
                                 LOGGER.exception(
                                     "Failed to send message: " + excp.message
                                 )
+                                pass
                 else:
                     try:
                         ENUM_FUNC_MAP[filt.file_type](
@@ -457,6 +460,7 @@ def reply_filter(update, context):
                                 )
                             except BadRequest as excp:
                                 LOGGER.exception("Error in filters: " + excp.message)
+                                pass
                         elif excp.message == "Reply message not found":
                             try:
                                 context.bot.send_message(
@@ -468,6 +472,7 @@ def reply_filter(update, context):
                                 )
                             except BadRequest as excp:
                                 LOGGER.exception("Error in filters: " + excp.message)
+                                pass
                         else:
                             try:
                                 send_message(
@@ -476,6 +481,7 @@ def reply_filter(update, context):
                                 )
                             except BadRequest as excp:
                                 LOGGER.exception("Error in filters: " + excp.message)
+                                pass
                             LOGGER.warning(
                                 "Message %s could not be parsed", str(filt.reply)
                             )
@@ -491,6 +497,7 @@ def reply_filter(update, context):
                         send_message(update.effective_message, filt.reply)
                     except BadRequest as excp:
                         LOGGER.exception("Error in filters: " + excp.message)
+                        pass
                 break
 
 
@@ -607,9 +614,9 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- ✪ /filters*:* List all active filters saved in the chat.
+ ❍ /filters*:* List all active filters saved in the chat.
 *Admin only:*
- ✪ /filter <keyword> <reply message>*:* Add a filter to this chat. The bot will now reply that message whenever 'keyword'\
+ ❍ /filter <keyword> <reply message>*:* Add a filter to this chat. The bot will now reply that message whenever 'keyword'\
 is mentioned. If you reply to a sticker with a keyword, the bot will reply with that sticker. NOTE: all filter \
 keywords are in lowercase. If you want your keyword to be a sentence, use quotes. eg: /filter "hey there" How you \
 doin?
@@ -621,14 +628,14 @@ doin?
  Reply 2
  %%%
  Reply 3`
- ✪ /stop <filter keyword>*:* Stop that filter.
+ ❍ /stop <filter keyword>*:* Stop that filter.
 *Chat creator only:*
- ✪ /removeallfilters*:* Remove all chat filters at once.
+ ❍ /removeallfilters*:* Remove all chat filters at once.
 *Note*: Filters also support markdown formatters like: {first}, {last} etc.. and buttons.
-Check `/markdownhelp` to know more!
+Check ❍ /markdownhelp to know more!
 """
 
-__mod_name__ = "Filters 📜"
+__mod_name__ = "Filters"
 
 FILTER_HANDLER = CommandHandler("filter", filters)
 STOP_HANDLER = CommandHandler("stop", stop_filter)
