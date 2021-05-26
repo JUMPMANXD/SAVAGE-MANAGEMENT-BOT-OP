@@ -1,7 +1,6 @@
+from ShasaBot.modules.helper_funcs.telethn import IMMUNE_USERS, telethn
+from ShasaBot import DRAGONS
 from telethon.tl.types import ChannelParticipantsAdmins
-
-from LEGEND import DRAGONS
-from LEGEND.modules.helper_funcs.telethn import IMMUNE_USERS, telethn
 
 
 async def user_is_ban_protected(user_id: int, message):
@@ -43,13 +42,13 @@ async def is_user_admin(user_id: int, chat_id):
     return status
 
 
-async def saitama_is_admin(chat_id: int):
+async def shasa_is_admin(chat_id: int):
     status = False
-    saitama = await telethn.get_me()
+    shasa = await telethn.get_me()
     async for user in telethn.iter_participants(
         chat_id, filter=ChannelParticipantsAdmins
     ):
-        if saitama.id == user.id:
+        if shasa.id == user.id:
             status = True
             break
     return status
