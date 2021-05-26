@@ -1,4 +1,3 @@
-import importlib
 from typing import Union
 
 from future.utils import string_types
@@ -13,8 +12,8 @@ from telegram.ext import (
 from telegram.utils.helpers import escape_markdown
 
 from LEGEND import dispatcher
-from LEGENDX.modules.helper_funcs.handlers import CMD_STARTERS, SpamChecker
-from LEGENDX.modules.helper_funcs.misc import is_module_loaded
+from LEGEND.modules.helper_funcs.handlers import CMD_STARTERS, SpamChecker
+from LEGEND.modules.helper_funcs.misc import is_module_loaded
 
 FILENAME = __name__.rsplit(".", 1)[-1]
 
