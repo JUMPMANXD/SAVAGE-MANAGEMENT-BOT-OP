@@ -1,39 +1,38 @@
 import html
-import os
 import re
-import subprocess
-
+import os
 import requests
-from telegram import MAX_MESSAGE_LENGTH, ParseMode, Update
-from telegram.error import BadRequest
-from telegram.ext import CallbackContext, CommandHandler
-from telegram.ext.dispatcher import run_async
-from telegram.utils.helpers import escape_markdown, mention_html
-from telethon import events
+
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
+from telethon import events
 
-import LEGEND.modules.sql.userinfo_sql as sql
-from LEGEND import (
-    DEMONS,
+from telegram import MAX_MESSAGE_LENGTH, ParseMode, Update
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.ext.dispatcher import run_async
+from telegram.error import BadRequest
+from telegram.utils.helpers import escape_markdown, mention_html
+
+from SaitamaRobot import (
     DEV_USERS,
-    DRAGONS,
-    INFOPIC,
     OWNER_ID,
+    DRAGONS,
+    DEMONS,
     TIGERS,
-    LEGENDX,
     WOLVES,
+    INFOPIC,
     dispatcher,
     sw,
 )
-from LEGEND import telethn as SaitamaTelethonClient
 from LEGEND.__main__ import STATS, TOKEN, USER_INFO
+import LEGEND.modules.sql.userinfo_sql as sql
 from LEGEND.modules.disable import DisableAbleCommandHandler
+from LEGEND.modules.sql.global_bans_sql import is_user_gbanned
+from LEGEND.modules.sql.afk_sql import is_afk, check_afk_status
+from LEGEND.modules.sql.users_sql import get_user_num_chats
 from LEGEND.modules.helper_funcs.chat_status import sudo_plus
 from LEGEND.modules.helper_funcs.extraction import extract_user
-from LEGEND.modules.sql.afk_sql import check_afk_status, is_afk
-from LEGEND.modules.sql.global_bans_sql import is_user_gbanned
-from LEGEND.modules.sql.users_sql import get_user_num_chats
+from LEGEND import telethn as SaitamaTelethonClient, TIGERS, DRAGONS, DEMONS
 
 
 def no_by_per(totalhp, percentage):
@@ -287,12 +286,11 @@ def info(update: Update, context: CallbackContext):
 
     disaster_level_present = False
 
-    if user.id == OWNER_ID or user.id == LEGENDX:
+    if user.id == OWNER_ID:
         text += "\n\nThe Disaster level of this person is 'God'."
         disaster_level_present = True
     elif user.id in DEV_USERS:
-
-        text += "\n\nThis user is member of 'TEAMLEGEND'."
+        text += "\n\nThis user is member of 'Titan Slayers'."
         disaster_level_present = True
     elif user.id in DRAGONS:
         text += "\n\nThe Disaster level of this person is 'Dragon'."
@@ -308,8 +306,9 @@ def info(update: Update, context: CallbackContext):
         disaster_level_present = True
 
     if disaster_level_present:
-
-        text += ' [<a href="https://t.me/SuzuyaUpdates/55">?</a>]'.format(bot.username)
+        text += ' [<a href="https://t.me/SurveyCorpsUpdates/6">?</a>]'.format(
+            bot.username
+        )
 
     try:
         user_member = chat.get_member(user.id)
@@ -423,16 +422,7 @@ def set_about_me(update: Update, context: CallbackContext):
 @run_async
 @sudo_plus
 def stats(update: Update, context: CallbackContext):
-    process = subprocess.Popen(
-        "neofetch --stdout", shell=True, text=True, stdout=subprocess.PIPE
-    )
-    output = process.communicate()[0]
-    stats = (
-        "<b>Current stats:</b>\n"
-        + "\n"
-        + output
-        + "\n".join([mod.__stats__() for mod in STATS])
-    )
+    stats = "<b>📊 Current stats:</b>\n" + "\n".join([mod.__stats__() for mod in STATS])
     result = re.sub(r"(\d+)", r"<code>\1</code>", stats)
     update.effective_message.reply_text(result, parse_mode=ParseMode.HTML)
 
@@ -530,21 +520,18 @@ __help__ = """
 *ID:*
  • `/id`*:* get the current group id. If used by replying to a message, gets that user's id.
  • `/gifid`*:* reply to a gif to me to tell you its file ID.
-
 *Self addded information:* 
- • `/setme <text>`*:* will set your info
+ • `/setme <text>`*:* will set the about user panel column in info panel
  • `/me`*:* will get your or another user's info.
 Examples:
  `/setme I am a wolf.`
  `/me @username(defaults to yours if no user specified)`
-
 *Information others add on you:* 
  • `/bio`*:* will get your or another user's bio. This cannot be set by yourself.
 • `/setbio <text>`*:* while replying, will save another user's bio 
 Examples:
  `/bio @username(defaults to yours if not specified).`
  `/setbio This user is a wolf` (reply to the user)
-
 *Overall Information about you:*
  • `/info`*:* get information about a user. 
  
@@ -572,7 +559,7 @@ dispatcher.add_handler(GET_BIO_HANDLER)
 dispatcher.add_handler(SET_ABOUT_HANDLER)
 dispatcher.add_handler(GET_ABOUT_HANDLER)
 
-__mod_name__ = "Info 🔬"
+__mod_name__ = "Info"
 __command_list__ = ["setbio", "bio", "setme", "me", "info"]
 __handlers__ = [
     ID_HANDLER,
