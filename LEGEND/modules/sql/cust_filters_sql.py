@@ -1,4 +1,4 @@
-import threads
+import threading
 
 from sqlalchemy import Boolean, Column, Integer, String, UnicodeText, distinct, func
 from LEGEND.modules.helper_funcs.msg_types import Types
