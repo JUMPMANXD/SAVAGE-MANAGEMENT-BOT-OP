@@ -82,7 +82,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(
-            text="💫 Add  to your group 💫",
+            text="💫 Add 𝐆-𝐃𝐑𝐀𝐆𝐎𝐍 𝐑𝐎𝐁𝐎𝐓 to your group 💫",
             url="t.me/GDRAGON_ROBOT?startgroup=true",
         ),
     ],
