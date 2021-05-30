@@ -65,12 +65,12 @@ from LEGEND.modules.helper_funcs.misc import paginate_modules
 from LEGEND.modules.helper_funcs.readable_time import get_readable_time
 
 PM_START_TEXT = """                   
-Hello there, I'm [𝐒𝐀𝐕𝐀𝐆𝐄 𝐁𝐎𝐓](https://telegra.ph/file/581295fcf392bb13dd0d6.jpg)
-I am an anime Themed Group Managing Bot and I will help in managing your group\n
+Hello there, I'm [𝐆-𝐃𝐑𝐀𝐆𝐎𝐍 𝐑𝐎𝐁𝐎𝐓](https://telegra.ph/file/ec13ce0df2735ae4ecf7f.jpg)
+I am an Kpop Themed Group Managing Bot and I will help in managing your group\n
 
 ✪ Make sure you read *INFO* Section Below ✪ \n
 
-𝐌𝐘 𝐆𝐎𝐃 - [丂卂爪乇乇尺](t.me/SAMEER_795)
+𝐌𝐘 𝐆𝐎𝐃 - [『𝐆𝐃™』⟦₭₩Ø₦ Jł ɎØ₦₲⟧「🇰🇷」](t.me/JUMPMAN_XD)
 """
               
 buttons = [
@@ -82,15 +82,15 @@ buttons = [
     ],
     [
         InlineKeyboardButton(
-            text="💫 Add SAVAGE BOT to your group 💫",
-            url="t.me/SAVAGE_MANAGER_BOT?startgroup=true",
+            text="💫 Add  to your group 💫",
+            url="t.me/GDRAGON_ROBOT?startgroup=true",
         ),
     ],
 ]
 
 
 HELP_STRINGS = f"""
-*Main Commands :* [SAVAGE BOT](https://telegra.ph/file/177228bdfd09ae95d34a6.jpg)
+*Main Commands :* [𝐆-𝐃𝐑𝐀𝐆𝐎𝐍 𝐑𝐎𝐁𝐎𝐓](https://telegra.ph/file/ec13ce0df2735ae4ecf7f.jpg)
 ✪ /start: Starts me! You've probably already used this.
 ✪ /help: Click this, I'll let you know about myself!
 ✪ /donate: You can support my creater using this command.
